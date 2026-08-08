@@ -1,0 +1,35 @@
+{
+  "name": "ecommerce-backend",
+  "version": "1.0.0",
+  "description": "Medusa-inspired e-commerce backend",
+  "main": "src/index.ts",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "seed": "tsx src/database/seed.ts",
+    "migrate": "tsx src/database/migrate.ts"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "sql.js": "^1.10.2",
+    "jsonwebtoken": "^9.0.2",
+    "bcryptjs": "^2.4.3",
+    "uuid": "^9.0.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "multer": "^1.4.5-lts.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.3.3",
+    "@types/express": "^4.17.21",
+    "@types/emscripten": "^1.39.10",
+    "@types/jsonwebtoken": "^9.0.5",
+    "@types/bcryptjs": "^2.4.6",
+    "@types/uuid": "^9.0.7",
+    "@types/cors": "^2.8.17",
+    "@types/multer": "^1.4.11",
+    "tsx": "^4.7.0",
+    "nodemon": "^3.0.2"
+  }
+}
