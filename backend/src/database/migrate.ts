@@ -43,7 +43,7 @@ export async function runMigrations(): Promise<void> {
     db.transaction(() => {
       db.exec(sql);
       db.prepare('INSERT INTO _migrations (name) VALUES (?)').run(file);
-    })();
+    });
 
     console.log(`[Migrate] Completed: ${file}`);
   }
