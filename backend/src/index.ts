@@ -14,6 +14,7 @@ import { CartService } from './modules/cart/service';
 import { OrderService } from './modules/order/service';
 import { CustomerService } from './modules/customer/service';
 import { PaymentService } from './modules/payment/service';
+import { runSeed } from './database/seed';
 
 // Routers
 import { AuthRouter } from './modules/auth/router';
@@ -109,6 +110,14 @@ async function start() {
     // Run database migrations
     await runMigrations();
     console.log('[Server] Database migrations complete');
+
+    // Auto-seed if database is empty
+    const productCount = db.get('SELECT COUNT(*) as cnt FROM products') as { cnt: number } | undefined;
+    if (!productCount || productCount.cnt === 0) {
+      console.log('[Server] Database empty, seeding...');
+      await runSeed();
+      console.log('[Server] Seed complete');
+    }
 
     // Register routes (after db is ready)
     registerRouters();
