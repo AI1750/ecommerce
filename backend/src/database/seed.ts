@@ -3,7 +3,7 @@ import { v4 as uuidv4 } from 'uuid';
 import { getDb, closeDb } from './connection';
 import { runMigrations } from './migrate';
 
-async function seed() {
+export async function runSeed() {
   console.log('[Seed] Running migrations...');
   await runMigrations();
 
@@ -215,7 +215,9 @@ async function seed() {
   await closeDb();
 }
 
-seed().catch((err) => {
-  console.error('[Seed] Error:', err);
-  process.exit(1);
-});
+if (require.main === module) {
+  runSeed().catch((err) => {
+    console.error('[Seed] Error:', err);
+    process.exit(1);
+  });
+}
