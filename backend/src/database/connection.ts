@@ -48,15 +48,11 @@ export class Database {
   }
 
   transaction(fn: () => void): void {
-    this.sqlDb.run('BEGIN');
     try {
       fn();
-      this.sqlDb.run('COMMIT');
-    } catch (err) {
-      try { this.sqlDb.run('ROLLBACK'); } catch {}
-      throw err;
+    } finally {
+      this.save();
     }
-    this.save();
   }
 
   pragma(pragma: string): void {
