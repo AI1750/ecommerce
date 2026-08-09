@@ -40,10 +40,8 @@ export async function runMigrations(): Promise<void> {
     console.log(`[Migrate] Running: ${file}`);
     const sql = fs.readFileSync(path.join(migrationsDir, file), 'utf-8');
 
-    db.transaction(() => {
-      db.exec(sql);
-      db.prepare('INSERT INTO _migrations (name) VALUES (?)').run(file);
-    });
+    db.exec(sql);
+    db.prepare('INSERT INTO _migrations (name) VALUES (?)').run(file);
 
     console.log(`[Migrate] Completed: ${file}`);
   }
