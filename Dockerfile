@@ -8,10 +8,9 @@ COPY backend/package*.json ./
 RUN npm install
 
 COPY backend/ ./
-RUN chmod +x entrypoint.sh
 
 ENV PORT=3001
 
 EXPOSE 3001
 
-ENTRYPOINT ["./entrypoint.sh"]
+CMD ["sh", "-c", "npx tsx src/database/seed.ts && exec npx tsx src/index.ts"]
